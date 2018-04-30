@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd": "${workspaceRoot}/app",
+            "env": {
+                "NODE_ENV": "development",
+                "DEBUG": "azure-functions-pack:*",
+                "MYSQLUSER": "",
+                "MYSQLPASSWORD": "",
+                "MYSQLDATABASE": "todos",
+                "MYSQLSERVER": ""
+            },
+            "name": "DEBUG",
+            "outFiles": [
+                "${workspaceRoot}/app/lib/**"
+            ],
+            "program": "${workspaceRoot}/app/bin/www",
+            "request": "launch",
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "runtimeExecutable": null,
+            "sourceMaps": true,
+            "stopOnEntry": false,
+            "type": "node"
+        }
+    ]
+}
