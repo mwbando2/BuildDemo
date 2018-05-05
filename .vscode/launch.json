@@ -11,8 +11,7 @@
                 "DEBUG": "azure-functions-pack:*",
                 "MYSQLUSER": "root",
                 "MYSQLPASSWORD": "my-secret-pw",
-                "MYSQLDATABASE": "todos",
-                "MYSQLSERVER": "localhost"
+                 "MYSQLSERVER": "localhost"
             },
             "name": "DEBUG",
             "outFiles": [
