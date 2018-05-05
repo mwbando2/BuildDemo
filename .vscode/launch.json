@@ -9,10 +9,10 @@
             "env": {
                 "NODE_ENV": "development",
                 "DEBUG": "azure-functions-pack:*",
-                "MYSQLUSER": "",
-                "MYSQLPASSWORD": "",
+                "MYSQLUSER": "root",
+                "MYSQLPASSWORD": "my-secret-pw",
                 "MYSQLDATABASE": "todos",
-                "MYSQLSERVER": ""
+                "MYSQLSERVER": "localhost"
             },
             "name": "DEBUG",
             "outFiles": [
