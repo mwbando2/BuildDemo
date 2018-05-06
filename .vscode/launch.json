@@ -10,7 +10,7 @@
                 "NODE_ENV": "development",
                 "DEBUG": "azure-functions-pack:*",
                 "MYSQLUSER": "root",
-                "MYSQLPASSWORD": "my-secret-pw",
+                "MYSQLPASSWORD": "build-pw",
                 "MYSQLDATABASE": "todos",
                  "MYSQLSERVER": "localhost"
             },
