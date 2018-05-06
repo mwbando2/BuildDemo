@@ -1,0 +1,43 @@
+# Login
+az login
+
+az account set --subscription "Azure CXP FTA Internal Subscription MBANDO"
+
+az group create --name mbando-build-app-rg --location westus
+
+# Create mysql
+az mysql server create --resource-group mbando-build-app-rg --name mbandobuilddemomysql --location westus --admin-user myadmin --admin-password Pass@word1 --sku-name GP_Gen4_2 --version 5.7
+
+# Create container registry
+az acr create --name mbandobuildjenkinsregistry --resource-group mbando-build-app-rg --sku Basic --admin-enabled
+
+# Create web app
+az appservice plan create --is-linux --name mbando-build-demo-asp --resource-group mbando-build-app-rg
+
+az --% webapp create --name mbandobuildmysqlapp --resource-group mbando-build-app-rg --plan mbando-build-demo-asp --runtime "node|8.0"
+
+az webapp config container set -c mbandobuildjenkinsregistry/webapp --resource-group mbando-build-app-rg --name mbandobuildmysqlapp
+
+az webapp config appsettings set --resource-group mbando-build-app-rg --name mbandobuildmysqlapp --settings MYSQLUSER=myadmin@mbandobuilddemomysql
+az webapp config appsettings set --resource-group mbando-build-app-rg --name mbandobuildmysqlapp --settings MYSQLPASSWORD=Pass@word1
+az webapp config appsettings set --resource-group mbando-build-app-rg --name mbandobuildmysqlapp --settings MYSQLDATABASE=todos
+az webapp config appsettings set --resource-group mbando-build-app-rg --name mbandobuildmysqlapp --settings MYSQLSERVER=mbandobuilddemomysql.mysql.database.azure.com
+
+# Create service principal
+az ad sp create-for-rbac --name mbandojenkins-demo-sp --password Pass@word1
+az account show
+
+# Get container registry credentials
+az acr credential show --name mbandobuildjenkinsregistry --resource-group mbando-build-app-rg
+
+
+
+
+
+
+
+# Cleanup
+az ad sp list --display-name mbandojenkins-demo-sp
+az ad sp delete --id <id>
+
+az group delete --name mbando-build-app-rg --yes
